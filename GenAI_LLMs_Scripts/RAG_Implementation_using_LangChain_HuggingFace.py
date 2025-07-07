@@ -15,7 +15,7 @@ LLM_MODEL_ID = "google/flan-t5-base"                                            
 def loadAndSplitPDF():
     documents = PyPDFLoader(PDF_URL).load()
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50) # Change chunk_size=1000 if giving wrong output
     docs = text_splitter.split_documents(documents)
     return docs
 
