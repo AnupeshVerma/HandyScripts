@@ -7,6 +7,12 @@ Topics:
 5. Langraph
 6. Multiagent workflow
 
+### Convert the Jupyter notebook(.ipynb) direclty to Python script(.py)
+```bash
+    pip install nbconvert
+    jupyter nbconvert --to script your_notebook.ipynb
+```
+--- 
 
 ### 🧠 Difference Between LLM and Agent
 
@@ -17,17 +23,17 @@ Topics:
 > 🔤 **LLM** = Smart speaker  
 > 🧠 **Agent** = Smart assistant with apps/tools
 
+---
 
-
-# 🧠 ReAct Agent Creation Methods in LangChain
+## 🧠 ReAct Agent Creation Methods in LangChain
 
 LangChain provides multiple ways to create ReAct-style agents. Below are the **4 main methods**, each explained with short code examples and guidance on when to use them.
 
 ---
 
-## 1. Using `initialize_agent` (Quick Setup)
+### 1. Using `initialize_agent` (Quick Setup)
 
-```
+```python
 from langchain.agents import initialize_agent, AgentType
 
 agent = initialize_agent(
@@ -45,8 +51,8 @@ response = agent.run("Your question here")
 
 ---
 
-## 2. Using `create_react_agent` (Custom Prompt)
-```
+### 2. Using `create_react_agent` (Custom Prompt)
+```python
 from langchain.agents import create_react_agent, AgentExecutor
 from langchain.prompts import PromptTemplate
 
@@ -67,9 +73,9 @@ response = agent_executor.invoke({"input": "Your question here"})
 
 ---
 
-## 3. Manual ReAct Agent (Full Control)
+### 3. Manual ReAct Agent (Full Control)
 
-```
+```python
 tool_names = ", ".join([tool.name for tool in tools])
 tool_descriptions = render_text_description(tools)
 
@@ -98,8 +104,8 @@ print(response)
 
 ---
 
-## 4. Using LangGraph (Advanced Graph-Based Agent)
-```
+### 4. Using LangGraph (Advanced Graph-Based Agent)
+```python
 builder = StateGraph(State)
 builder.add_node("llm_node", chatbot)
 builder.add_node("tool_node", ToolNode(tools))
@@ -112,3 +118,6 @@ builder.set_finish_point("llm_node")
 graph = builder.compile()
 response = graph.invoke({"input": "Your question here"})
 ```
+- **Best For:** Multi-step workflows and decision trees
+- **How It Works:**  Represents the agent loop as a state machine
+- **Customization:** 🚀 Extremely flexible
